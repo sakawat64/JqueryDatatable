@@ -1,3 +1,7 @@
+<div class="col-md-4">
+       <span id="totalZoneWiseBill" class="label bg-slate-800" style="font-size: 13px;"></span>
+       
+    </div>
 <div class="row" style="font-size:12px">
     <div class="col-md-12 table-responsive">
         <table class="table table-responsive table-bordered table-hover table-striped" id="datatable_view_due">
@@ -79,6 +83,19 @@
 
             });
         });
+        $.post("view/ajax_action/ajax_data_return.php", function (data) {
+
+            $('#billAmount').html(data.duePayment.toLocaleString() + " Taka");
+
+        }, "json");
+
+
+        // show total bill amount above table
+        function showZoneWiseBill(bill) {
+
+            $('#totalZoneWiseBill').html('For This Clients Total Due Bill : ' + bill.toLocaleString() + ' Taka');
+
+        }
 
         setTimeout(progress, 500);
         var table = $('#datatable_view_due').DataTable({
